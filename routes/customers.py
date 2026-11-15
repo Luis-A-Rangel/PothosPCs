@@ -131,3 +131,68 @@ def logout():
 
     return redirect(url_for("main.home"))
 
+
+@customers.route("/account")
+def account():
+    if "customer_id" not in session:
+        return redirect(url_for("customers.login", next=request.path))
+
+    connection = get_db_connection()
+
+    if connection is None:
+        return "Could not connect to the database."
+
+    cursor = connection.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT customer_ID, first_Name, last_Name, email, phone
+        FROM Customer
+        WHERE customer_ID = %s
+    """, (session["customer_id"],))
+
+    customer = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    if customer is None:
+        session.clear()
+        return redirect(url_for("customers.login"))
+
+    return render_template("account.html", customer=customer)
+
+
+@customers.route("/account/orders")
+def account_orders():
+    if "customer_id" not in session:
+        return redirect(url_for("customers.login", next=request.path))
+
+    connection = get_db_connection()
+
+    if connection is None:
+        return "Could not connect to the database."
+
+    cursor = connection.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT
+            o.order_ID,
+            o.order_date,
+            o.total_price,
+            o.payment_method,
+            p.pc_ID,
+            p.model_name,
+            p.price,
+            p.image
+        FROM Orders o
+        LEFT JOIN PC p ON p.order_ID = o.order_ID
+        WHERE o.customer_ID = %s
+        ORDER BY o.order_date DESC
+    """, (session["customer_id"],))
+
+    orders = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return render_template("account_orders.html", orders=orders)
