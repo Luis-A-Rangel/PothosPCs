@@ -1,0 +1,78 @@
+
+{% extends "base.html" %}
+
+{% block title %}Account Information - PothosPCs{% endblock %}
+
+{% block content %}
+
+<div class="account-layout">
+
+    <!-- ACCOUNT SIDEBAR -->
+    <aside class="account-sidebar">
+        <h5>Welcome {{ customer.first_Name }}</h5>
+
+        <nav class="nav flex-column">
+            <a class="nav-link active"
+               href="{{ url_for('customers.account') }}">
+                Account Information
+            </a>
+
+            <a class="nav-link"
+               href="{{ url_for('customers.account_orders') }}">
+                Orders
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ACCOUNT INFORMATION -->
+    <main class="account-content">
+
+        <h2>Account Information</h2>
+
+        <div class="account-info-card">
+
+            <div class="account-info-row">
+                <strong>First Name:</strong>
+                {{ customer.first_Name }}
+            </div>
+
+            <div class="account-info-row">
+                <strong>Last Name:</strong>
+                {{ customer.last_Name }}
+            </div>
+
+            <div class="account-info-row">
+                <strong>Email:</strong>
+                {{ customer.email }}
+            </div>
+
+            <div class="account-info-row">
+                <strong>Phone:</strong>
+                {{ customer.phone }}
+            </div>
+
+        </div>
+
+        <!-- SUPPORT -->
+        <section class="account-support">
+            <h3>Support:</h3>
+
+            <p>
+                If you need assistance with your account or an order,
+                please contact us.
+            </p>
+
+            <p>
+                <strong>999-999-9999</strong>
+                &nbsp; | &nbsp;
+                <a href="mailto:support@gmail.com">
+                    support@gmail.com
+                </a>
+            </p>
+        </section>
+
+    </main>
+
+</div>
+
+{% endblock %}

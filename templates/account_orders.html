@@ -1,0 +1,95 @@
+
+{% extends "base.html" %}
+
+{% block title %}My Orders - PothosPCs{% endblock %}
+
+{% block content %}
+
+<div class="account-layout">
+
+    <!-- ACCOUNT SIDEBAR -->
+    <aside class="account-sidebar">
+        <h5>Welcome {{ session.customer_name }}</h5>
+
+        <nav class="nav flex-column">
+            <a class="nav-link"
+               href="{{ url_for('customers.account') }}">
+                Account Information
+            </a>
+
+            <a class="nav-link active"
+               href="{{ url_for('customers.account_orders') }}">
+                Orders
+            </a>
+        </nav>
+    </aside>
+
+    <!-- ORDERS -->
+    <main class="account-content">
+
+        <h2>Orders</h2>
+
+        {% if orders %}
+
+            {% for order in orders %}
+
+                <div class="account-order-card">
+
+                    <div class="account-order-image">
+                        {% if order.image %}
+                            <img src="{{ url_for('static', filename='images/' ~ order.image) }}"
+                                 alt="{{ order.model_name }}">
+                        {% else %}
+                            <span>No Image</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="account-order-details">
+
+                        <h5>{{ order.model_name or "Product unavailable" }}</h5>
+
+                        <p class="mb-1">
+                            Order #{{ order.order_ID }}
+                        </p>
+
+                        <p class="mb-1">
+                            Order Date: {{ order.order_date }}
+                        </p>
+
+                        <p class="mb-1">
+                            Price: ${{ "%.2f"|format(order.price or 0) }}
+                        </p>
+
+                        <p class="mb-0">
+                            Payment: {{ order.payment_method }}
+                        </p>
+
+                    </div>
+
+                    <div class="account-order-actions">
+                        <a href="{{ url_for('products.pc_details', pc_id=order.pc_ID) }}"
+                           class="btn btn-dark btn-sm">
+                            View PC
+                        </a>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p>You haven't placed any orders yet.</p>
+
+            <a href="{{ url_for('products.shop') }}"
+               class="btn btn-dark">
+                Shop PCs
+            </a>
+
+        {% endif %}
+
+    </main>
+
+</div>
+
+{% endblock %}

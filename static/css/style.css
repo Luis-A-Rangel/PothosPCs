@@ -176,3 +176,150 @@ body {
 .site-footer hr {
     border-color: #64748b;
 }
+
+
+/* ACCOUNT PAGES */
+.account-layout {
+    display: flex;
+    min-height: 550px;
+    background-color: #ffffff;
+}
+
+.account-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background-color: #a3afc4;
+    padding: 30px 20px;
+    color: #172033;
+}
+
+.account-sidebar h5 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.account-sidebar .nav-link {
+    color: #526078;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.account-sidebar .nav-link:hover,
+.account-sidebar .nav-link.active {
+    background-color: #e2e6ef;
+    color: #172033;
+}
+
+.account-content {
+    flex: 1;
+    padding: 40px;
+    min-width: 0;
+}
+
+.account-content h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.account-info-card {
+    max-width: 650px;
+    margin-bottom: 35px;
+}
+
+.account-info-row {
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e5ec;
+}
+
+.account-info-row strong {
+    display: inline-block;
+    min-width: 140px;
+}
+
+.account-support {
+    margin-top: 35px;
+}
+
+.account-support a {
+    color: #172033;
+    text-decoration: none;
+}
+
+.account-support a:hover {
+    text-decoration: underline;
+}
+
+.account-order-card {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    background-color: #e2e6ef;
+    border: 1px solid #172033;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.account-order-image {
+    width: 130px;
+    height: 110px;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    border: 1px solid #172033;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-order-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.account-order-details {
+    flex: 1;
+}
+
+.account-order-details h5 {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.account-order-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.account-order-status {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .account-layout {
+        flex-direction: column;
+    }
+
+    .account-sidebar {
+        width: 100%;
+    }
+
+    .account-content {
+        padding: 25px 18px;
+    }
+
+    .account-order-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .account-order-image {
+        width: 100%;
+    }
+}
