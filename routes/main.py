@@ -15,6 +15,7 @@ def home():
         cursor.execute("""
             SELECT pc_ID, model_name, price, specs, type
             FROM PC
+            WHERE order_ID IS NULL
         """)
 
         pcs = cursor.fetchall()

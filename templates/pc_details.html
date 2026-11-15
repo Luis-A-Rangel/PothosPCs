@@ -43,12 +43,18 @@
                             ${{ "%.2f"|format(pc.price) }}
                         </span>
 
+                        {% if pc.order_ID %}
+                        <span class="btn btn-secondary px-4 disabled">
+                            Sold
+                        </span>
+                        {% else %}
                         <form method="POST"
                               action="{{ url_for('cart.add_to_cart', pc_id=pc.pc_ID) }}">
                             <button type="submit" class="btn btn-dark px-4">
                                 + Buy
                             </button>
                         </form>
+                        {% endif %}
 
                     </div>
 

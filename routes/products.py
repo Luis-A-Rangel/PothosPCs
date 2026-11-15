@@ -15,6 +15,7 @@ def shop():
         cursor.execute("""
             SELECT pc_ID, model_name, price, specs, type
             FROM PC
+            WHERE order_ID IS NULL
         """)
 
         pcs = cursor.fetchall()
@@ -36,7 +37,7 @@ def pc_details(pc_id):
 
     cursor.execute("""
         SELECT pc_ID, model_name, price, specs, type,
-               promo_text, description, image
+               promo_text, description, image, order_ID
         FROM PC
         WHERE pc_ID = %s
     """, (pc_id,))

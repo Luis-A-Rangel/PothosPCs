@@ -81,9 +81,11 @@
                     Back
                 </a>
 
-                <button type="button" class="btn btn-dark btn-lg px-4">
+                {% if pcs %}
+                <a href="{{ url_for('cart.checkout') }}" class="btn btn-dark btn-lg px-4">
                     Checkout
-                </button>
+                </a>
+                {% endif %}
 
             </div>
 

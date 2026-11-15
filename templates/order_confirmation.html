@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+
+{% block title %}Order #{{ order.order_ID }} | PothosPCs{% endblock %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <div class="text-center mb-5">
+                <h1 class="fw-bold">Thank you for your order!</h1>
+                <p class="text-muted mb-0">
+                    Order #{{ order.order_ID }} &middot;
+                    {{ order.order_date.strftime("%B %d, %Y") }} &middot;
+                    Paid with {{ order.payment_method }}
+                </p>
+            </div>
+
+            {% for pc in pcs %}
+
+            <div class="cart-item d-flex flex-column flex-md-row align-items-md-center gap-4 mb-3">
+
+                <div class="cart-item-image">
+                    {% include 'pc_image.html' %}
+                </div>
+
+                <div class="flex-grow-1">
+                    <h4 class="fw-bold mb-1">{{ pc.model_name }}</h4>
+                    <p class="text-muted mb-0">{{ pc.specs }}</p>
+                </div>
+
+                <p class="fw-bold fs-5 mb-0">
+                    ${{ "%.2f"|format(pc.price) }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+            <div class="cart-subtotal d-flex justify-content-between align-items-center mt-5">
+                <h3 class="fw-bold mb-0">Total:</h3>
+                <h3 class="fw-bold mb-0">${{ "%.2f"|format(order.total_price) }}</h3>
+            </div>
+
+            <div class="text-end mt-3">
+                <a href="{{ url_for('products.shop') }}" class="btn btn-dark btn-lg px-4">
+                    Continue Shopping
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

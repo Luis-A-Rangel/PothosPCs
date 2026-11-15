@@ -110,6 +110,12 @@ def login():
                 session["customer_id"] = customer["customer_ID"]
                 session["customer_name"] = customer["first_Name"]
 
+                # Send the customer back to where they were (e.g. checkout)
+                next_page = request.args.get("next", "")
+
+                if next_page.startswith("/") and not next_page.startswith("//"):
+                    return redirect(next_page)
+
                 return redirect(url_for("main.home"))
 
             else:
